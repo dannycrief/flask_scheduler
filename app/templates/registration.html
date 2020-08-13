@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block register %}
+    <style>
+        body {
+            height: calc(100vh - 68px);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        footer {
+            height: 68px;
+            position: absolute;
+            bottom: 0;
+            background-color: #6A7685;
+            width: 100%;
+        }
+
+        .auth_top {
+            height: 60%;
+        }
+
+        .auth_socials {
+            height: 40%;
+        }
+
+        main {
+            display: flex;
+            background-color: black;
+        }
+
+    </style>
+    <div class="logo">
+        <p>Simple Scheduler</p>
+    </div>
+    <main>
+        <div class="main_content">
+            <div class="auth_top">
+                <div class="page_menu">
+                    <ul>
+                        <li><a href="{{ url_for('login') }}" class="link_passive">Log in</a></li>
+                        <li><a class="link_active">Sign up</a></li>
+                    </ul>
+                </div>
+                <form method="post">
+                    <div class="input_group">
+{#                        <input type="text" placeholder="Full name" name="full_name" value="">#}
+                        <input type="email" placeholder="Email" name="email" value="">
+                        <input type="password" placeholder="Password" name="password" value="">
+                    </div>
+                    <div class="login_button">
+                        <button type="submit" class="btn btn-secondary"
+                                style="background-color: #D3DCE3; border: none;">
+                            Sign up
+                        </button>
+                    </div>
+                </form>
+                <div class="password_reset">
+                    <p>By signing up you accept<br>Doodle's Terms of service and<br>Privacy policy</p>
+                </div>
+            </div>
+            <hr class="horizontal_line">
+            <div class="auth_socials">
+                <div class="socials">
+                    <ul>
+                        <li>
+                            <button type="button" class="btn btn-light">
+                            <span class="icon">
+                                <i class="fab fa-google" style="color: #CF4540"></i>
+                            </span>
+                                Continue with Google
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-light">
+                            <span class="icon">
+                                <i class="fab fa-facebook-square" style="color: #3B5998"></i>
+                            </span>
+                                Continue with Facebook
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-light">
+                            <span class="icon">
+                                <i class="fab fa-vk" style="color: #5181B8"></i>
+                            </span>
+                                Continue with VK
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-light">
+                            <span class="icon">
+                                <i class="fab fa-twitter-square" style="color: #2A9DEE"></i>
+                            </span>
+                                Continue with Twitter
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="secondary_content">
+            <ul>
+                <li><i class="fas fa-check"></i> Get the result, votes and<br>comments on polls<br>straight into your
+                    inbox
+                </li>
+                <li><i class="fas fa-check"></i> Create event<br>with your calendar<br>and check your daily score</li>
+                <li><i class="fas fa-check"></i> Faster voting and<br>commenting</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <h1>footer</h1>
+    </footer>
+{% endblock %}

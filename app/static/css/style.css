@@ -1,0 +1,169 @@
+body {
+    background-color: #1B4686;
+}
+
+/*LOGIN PAGE*/
+.main_content {
+    background-color: white;
+    height: 685px;
+    width: 440px;
+    border-radius: 3px;
+    display: flex;
+}
+
+.auth_top {
+    height: 50%;
+}
+
+.auth_socials {
+    height: 50%;
+}
+
+
+.logo p {
+    font-size: 35px !important;
+    margin: 17px 0;
+    color: white;
+    font-weight: bold;
+}
+
+.main_content {
+    flex-direction: column;
+}
+
+/*LOGIN TOP MENU*/
+.auth_top {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.page_menu {
+    margin-top: 15px;
+    align-self: center;
+}
+
+a.link_active {
+    color: #2372E8;
+    text-decoration: underline;
+}
+
+a.link_passive {
+    color: #D3DCE3;
+}
+
+.page_menu ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+
+.page_menu > ul > li {
+    list-style: none;
+}
+
+.page_menu > ul > li:first-child {
+    margin-right: 7px;
+}
+
+.page_menu > ul > li:last-child {
+    margin-left: 7px;
+}
+
+.page_menu > ul > li > a {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.input_group {
+    display: flex;
+    flex-direction: column;
+    width: 17rem;
+    align-self: center;
+}
+
+.input_group input {
+    margin: 8px 0;
+    height: 3rem;
+}
+
+.login_button {
+    width: 17rem;
+    margin-top: 6px;
+}
+
+.login_button > button {
+    width: 100%;
+    height: 3rem;
+}
+
+.password_reset {
+    margin-top: 8px;
+}
+
+.password_reset > p > a {
+    color: #2567CA;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+hr.horizontal_line {
+    background-color: #D3DCE3;
+    height: 0px;
+    width: 100%;
+    margin: 0;
+}
+
+/*LOGIN AUTH SOCIALS*/
+.auth_socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 50%;
+    background-color: #EBEFF2;
+}
+
+.socials > ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.socials > ul > li {
+    width: 17rem;
+    margin: 7px 0;
+    height: 3rem;
+}
+
+.socials > ul > li > button {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #D3DCE3;
+}
+
+span.icon {
+    font-size: 23px;
+}
+
+
+/*REGISTER PAGE*/
+.secondary_content {
+    padding: 40px;
+    background-color: #215BB2;
+    color: white;
+}
+
+.secondary_content > ul {
+    list-style: none;
+    padding: 0;
+}
+
+.secondary_content > ul > li {
+    font-size: 17px;
+}
