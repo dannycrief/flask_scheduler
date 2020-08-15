@@ -1,5 +1,6 @@
 body {
     background-color: #1B4686;
+    font-family: 'Baloo Tamma 2', cursive;
 }
 
 /*LOGIN PAGE*/
@@ -166,4 +167,183 @@ span.icon {
 
 .secondary_content > ul > li {
     font-size: 17px;
+}
+
+/*DASHBOARD PAGE*/
+.content_header {
+    margin: 0;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header_left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span.sign {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+
+.header_left > p {
+    margin: 0;
+}
+
+.name_ {
+    font-weight: bold;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #2372E8;
+}
+
+.main_logo:hover {
+    text-decoration: none;
+}
+
+
+.header_right > ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.header_right > ul > li {
+    margin: 0 5px;
+}
+
+.dropdown > a#dropdownMenuLink {
+    background-color: white;
+    color: black;
+    border: none;
+    font-weight: bold;
+}
+
+.dropdown > a#dropdownMenuLink:last-child {
+    background-color: #dd3809;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.user_image {
+    margin-right: 5px;
+}
+
+.username {
+    font-weight: 500;
+}
+
+i.far.fa-user-circle {
+    font-size: 20px;
+}
+
+.content_body {
+    display: flex;
+    flex-direction: row;
+    padding-top: 40px;
+}
+
+.content_body_left,
+.content_body_right {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content_body_left {
+    width: 30%;
+    height: 100%;
+    background-color: white;
+}
+
+.content_body_right {
+    width: 70%;
+    height: 100%;
+    background-color: #F8F9FA;
+    padding: 20px 0;
+}
+
+.content_body_right_title {
+    padding-bottom: 20px;
+    font-weight: 500;
+}
+
+.content_cards {
+    display: flex;
+    align-items: center;
+}
+
+a.content_cards_link {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+a.content_cards_link:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.content_body_right_cards {
+    border: 1px solid #8694A6;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 10px;
+    min-width: 11rem;
+    cursor: pointer;
+}
+
+.content_body_right_cards:hover .card_button > button {
+    background-color: #f25b36 !important;
+    border-color: #f25b36 !important;
+}
+
+.card_logo {
+    padding: 20px 0 7px 0;
+}
+
+.card_logo > i.far,
+.card_logo > i.fas {
+    font-size: 40px;
+}
+
+.card_title {
+    font-weight: 500;
+    color: #2F3751;
+    font-size: 18px;
+}
+
+.card_p {
+    font-size: 15px;
+    text-align: center;
+    margin: 2px 0 0 0;
+    font-weight: 400;
+}
+
+.card_button {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.card_button > button {
+    width: 9rem;
+}
+
+.btn-danger:hover {
+    background-color: #f25b36 !important;
+    border-color: #f25b36 !important;
 }

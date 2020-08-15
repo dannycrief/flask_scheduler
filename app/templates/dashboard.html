@@ -1,4 +1,112 @@
 {% extends 'base.html' %}
 {% block dashboard %}
-    <h1>User email is: {{ user }}</h1>
+    <style>
+        body {
+            height: calc(100vh - 68px);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .main_content {
+            width: 47%;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+    </style>
+    {% if current_user.is_authenticated %}
+        <div class="main_content">
+            <div class="content_header">
+                <div class="header_left">
+                    <span class="sign"><i class="far fa-clock"></i></span>
+                    <p class="name_"><a href="#" class="main_logo">Simple Scheduler</a></p>
+                </div>
+                <div class="header_right">
+                    <ul>
+                        <li>
+                            {% if current_user.is_authenticated %}
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                       id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="user_image"><i
+                                                class="far fa-user-circle"></i></span><span
+                                            class="username">{{ current_user.email }}</span>
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Account settings</a>
+                                        <a class="dropdown-item" href="#">Help</a>
+                                        <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        <li>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                   style="background-color: #DD3809; color: white;">
+                                    <span>+</span> More
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Create event</a>
+                                    <a class="dropdown-item" href="#">List of events</a>
+                                    <a class="dropdown-item" href="#">Calendar</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content_body">
+                <div class="content_body_left">
+                    <h1 class="content_body_left_title">Menu</h1>
+                </div>
+                <div class="content_body_right">
+                    <h3 class="content_body_right_title">Start by creating your first event</h3>
+                    <div class="content_cards">
+                        <a href="#" class="content_cards_link">
+                            <div class="content_body_right_cards">
+                                <div class="card_logo"><i class="far fa-handshake"></i></div>
+                                <div class="card_title">Create event</div>
+                                <div class="card_p">Create your events fast!</div>
+                                <div class="card_button">
+                                    <button type="button" class="btn btn-danger"
+                                            style="background-color: #dd3809; color: white; font-weight: bold;">Danger
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="content_cards_link">
+                            <div class="content_body_right_cards">
+                                <div class="card_logo"><i class="fas fa-list"></i></div>
+                                <div class="card_title">List of events</div>
+                                <div class="card_p">Show list of events</div>
+                                <div class="card_button">
+                                    <button type="button" class="btn btn-danger"
+                                            style="background-color: #dd3809; color: white; font-weight: bold;">Danger
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="content_cards_link">
+                            <div class="content_body_right_cards">
+                                <div class="card_logo"><i class="far fa-calendar-alt"></i></div>
+                                <div class="card_title">Calendar</div>
+                                <div class="card_p">Show what to expect</div>
+                                <div class="card_button">
+                                    <button type="button" class="btn btn-danger"
+                                            style="background-color: #dd3809; color: white; font-weight: bold;">Danger
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
