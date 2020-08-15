@@ -201,6 +201,11 @@ span.sign {
     color: #2372E8;
 }
 
+.main_logo {
+    font-weight: 800;
+    font-size: 30px;
+}
+
 .main_logo:hover {
     text-decoration: none;
 }
