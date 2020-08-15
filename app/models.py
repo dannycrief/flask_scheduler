@@ -3,7 +3,7 @@ from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-from . import ma, login_manager
+from . import login_manager
 
 from conf import Config
 
@@ -17,10 +17,10 @@ Base.query = db_session.query_property()
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return User.query.get(user_id)
 
 
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = 'user'
 
     email = Column(String, primary_key=True)
@@ -43,7 +43,3 @@ class User(Base):
     def __repr__(self):
         return "<User %r>" % self.email
 
-
-class UserSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = User
