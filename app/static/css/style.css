@@ -252,6 +252,7 @@ i.far.fa-user-circle {
     display: flex;
     flex-direction: row;
     padding-top: 40px;
+    height: 100%;
 }
 
 .content_body_left,
@@ -262,16 +263,89 @@ i.far.fa-user-circle {
 }
 
 .content_body_left {
-    width: 30%;
+    width: 25%;
     height: 100%;
     background-color: white;
+    padding: 20px 0;
 }
 
 .content_body_right {
-    width: 70%;
+    width: 75%;
     height: 100%;
     background-color: #F8F9FA;
     padding: 20px 0;
+}
+
+.content_body_left_title {
+    font-size: 35px;
+    font-weight: 500;
+    align-self: flex-start;
+    padding-left: 35px;
+}
+
+.calendar_title {
+    padding-top: 30px;
+}
+
+.create_calendar {
+    border: 1px solid #EBEFF2;
+    padding: 18px 10px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.create_calendar > button {
+    background-color: white !important;
+    color: #4A505E !important;
+    font-weight: 600;
+    border: 1px solid #D3DCE3 !important;
+    padding-bottom: 2px;
+}
+
+.create_calendar > button:hover {
+    background-color: #EBEFF2 !important;
+}
+
+.create_calendar > button:focus {
+    box-shadow: 0 0 0 2px #215BB2 !important;
+}
+
+
+.create_calendar_title {
+    position: absolute;
+    top: -13px;
+    background-color: #DDEFFE;
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+.create_calendar_title > span {
+    font-size: 12px;
+    color: #88510F;
+    font-weight: 500;
+}
+
+.content_body_left_list {
+    align-self: flex-start;
+    padding-left: 35px;
+}
+
+.content_body_left_list > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.content_body_left_list > ul > li {
+    margin: 10px 0;
+    list-style: none;
+}
+
+.content_body_left_list > ul > li > a {
+    font-size: 20px;
+    font-weight: 400;
+    color: #929595;
+    cursor: not-allowed;
+    text-decoration: none;
 }
 
 .content_body_right_title {
@@ -319,6 +393,7 @@ a.content_cards_link:hover {
 .card_logo > i.far,
 .card_logo > i.fas {
     font-size: 40px;
+    color: #3798D4;
 }
 
 .card_title {
