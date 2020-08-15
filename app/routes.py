@@ -1,9 +1,19 @@
-from flask import render_template, request, redirect, session, jsonify, flash, url_for, g
+import flask_login
+from flask import render_template, request, redirect, session, flash, url_for, g
 from flask_login import login_user, login_required, logout_user, current_user
-
-from app import app, db, bcrypt, login_manager
+from datetime import timedelta
+from app import app, db, bcrypt
+import flask
 
 from app.models import User, db_session
+
+
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=30)
+    flask.session.modified = True
+    flask.g.user = flask_login.current_user
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -19,7 +29,8 @@ def login():
             current_db_sessions = db_session.object_session(user)
             current_db_sessions.add(user)
             db.session.commit()
-            login_user(user, remember=True)
+            session.permanent = True
+            login_user(user, remember=False)
             if not current_user.is_active():
                 flash('Detected user is inactive.')
             return redirect(url_for('dashboard'))
@@ -50,10 +61,14 @@ def register_user():
 @login_required
 @app.route('/dashboard')
 def dashboard():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
     return render_template('dashboard.html', title="Dashboard")
 
 
 @login_required
-@app.route('/create')
+@app.route('/create_event')
 def create_event():
-    return render_template('eventCreate.html')
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    return render_template('createEvent.html', title="Crete event")

@@ -5,7 +5,6 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 from flask.json import JSONEncoder
 
 from conf import Config
@@ -28,13 +27,14 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 login_manager = LoginManager()
 login_manager.login_view = 'login'
+login_manager.refresh_view = 'login'
+login_manager.needs_refresh_message = (u"Session timedout, please re-login")
+login_manager.needs_refresh_message_category = "info"
 login_manager.init_app(app)
 bcrypt = Bcrypt(app)
 
 app.json_encoder = CustomJSONEncoder
 
 db = SQLAlchemy(app=app)
-# ma = Marshmallow(app)
-
 db.create_all()
 from app import routes, models
