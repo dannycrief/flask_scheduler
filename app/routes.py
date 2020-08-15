@@ -1,30 +1,29 @@
-from flask import render_template, request, redirect, session, jsonify
+from flask import render_template, request, redirect, session, jsonify, flash, url_for, g
 from flask_login import login_user, login_required, logout_user, current_user
 
 from app import app, db, bcrypt, login_manager
 
-from app.models import User, db_session, UserSchema
+from app.models import User, db_session
 
 
 @app.route('/', methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
     if request.method == "POST":
         user_email = request.form.get('email')
         user = User.query.get(user_email)
-        if user:
-            input_data_password = request.form.get('password')
-            if bcrypt.check_password_hash(user.password, input_data_password):
-                print(user.authenticated)
-                user.authenticated = True
-                print(user.authenticated)
-                session["email"] = user
-                current_db_sessions = db_session.object_session(user)
-                current_db_sessions.add(user)
-                # db.session.add(user)
-                db.session.commit()
-                login_user(user, remember=True)
-                return redirect('/dashboard')
-    return render_template('login.html')
+        input_data_password = request.form.get('password')
+        if user is not None and bcrypt.check_password_hash(user.password, input_data_password):
+            user.authenticated = True
+            current_db_sessions = db_session.object_session(user)
+            current_db_sessions.add(user)
+            db.session.commit()
+            login_user(user, remember=True)
+            if not current_user.is_active():
+                flash('Detected user is inactive.')
+            return redirect(url_for('dashboard'))
+    return render_template('login.html', title="Login")
 
 
 @app.route('/logout')
@@ -45,17 +44,13 @@ def register_user():
         db.session.add(user)
         db.session.commit()
         return redirect('/')
-    return render_template('registration.html')
+    return render_template('registration.html', title="Registration")
 
 
 @login_required
 @app.route('/dashboard')
 def dashboard():
-    user = User.query.first()
-    user_schema = UserSchema()
-    output = user_schema.dump(user).data
-    json_output = jsonify({"output": output})
-    return render_template('dashboard.html', user=json_output)
+    return render_template('dashboard.html', title="Dashboard")
 
 
 @login_required
