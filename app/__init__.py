@@ -27,12 +27,14 @@ app.config.from_object(Config)
 app.secret_key = os.getenv("SECRET_KEY")
 
 login_manager = LoginManager()
+login_manager.login_view = 'login'
 login_manager.init_app(app)
 bcrypt = Bcrypt(app)
 
 app.json_encoder = CustomJSONEncoder
 
 db = SQLAlchemy(app=app)
-ma = Marshmallow(app)
+# ma = Marshmallow(app)
+
 db.create_all()
 from app import routes, models
