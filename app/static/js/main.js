@@ -37,9 +37,4 @@ $(document).ready(function () {
             });
         });
     });
-    // const contentListElement = $('.content_events_list').length;
-    // if (contentListElement !== 0) {
-    //     $('.content_body_right_title').remove();
-    //     $('.content_cards').remove();
-    // }
 });
