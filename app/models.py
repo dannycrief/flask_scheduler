@@ -49,9 +49,12 @@ class Event(Base):
     __tablename__ = 'event'
 
     _id = Column(Integer, primary_key=True)
-    start_time = Column(DateTime, unique=False, nullable=False)
-    end_time = Column(DateTime, unique=False, nullable=False)
+    start_time = Column(Date, unique=False, nullable=False)
+    end_time = Column(Date, unique=False, nullable=False)
     author_email = Column(String, ForeignKey('user.email'), nullable=False)
     author = relationship('User', foreign_keys=[author_email])
     subject = Column(String, unique=False, nullable=False)
     description = Column(String, unique=False, nullable=False)
+
+    def get_id(self):
+        return self._id
