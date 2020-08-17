@@ -6,3 +6,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(db_path)
     # os.environ['DATABASE_URL']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    POSTS_PER_PAGE = 3
