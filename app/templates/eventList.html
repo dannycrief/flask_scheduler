@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block eventList %}
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-grow: 1;
+        }
+    </style>
+    {% for event in events %}
+        <div class="card w-20">
+            <div class="card-body">
+                <h5 class="card-title">Subject: {{ event.subject }}</h5>
+                <p class="card-text">Description: {{ event.description }}</p>
+                <p class="card-text">Start time: {{ event.start_time }}</p>
+                <p class="card-text">End time: {{ event.end_time }}</p>
+                <p class="card-text">Author email {{ event.author_email }}</p>
+                {% if event.author_email == current_user.email %}
+                    <a href="{{ url_for('event_edit', _method='GET', event_id=event._id|int) }}"
+                       class="btn btn-primary">Edit</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+{% endblock %}

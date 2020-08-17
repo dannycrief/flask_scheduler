@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block eventEdit %}
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .main_content {
+            width: 47%;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+    </style>
+    <div class="main_content">
+        <p>{{ event._id }}</p>
+        <p>{{ event.author_email }}</p>
+        <p>{{ event.subject }}</p>
+    </div>
+{% endblock %}

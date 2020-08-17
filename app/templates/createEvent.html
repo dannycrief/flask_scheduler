@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block createEvent %}
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-grow: 1;
+            background-color: #FAF7F5;
+        }
+
+        .main_content {
+            width: 45%;
+            height: 55%;
+            margin-top: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.12);
+            border-radius: 6px;
+        }
+    </style>
+    <div class="main_content show" style="margin: 0;">
+        <div class="content_header">
+            <div class="header_left">
+                <span class="sign"><i class="far fa-clock"></i></span>
+                <p class="name_"><a href="{{ url_for('dashboard') }}" class="main_logo">Simple Scheduler</a></p>
+            </div>
+            <div class="header_right">
+                <ul>
+                    <li>
+                        {% if current_user.is_authenticated %}
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="user_image"><i
+                                                class="far fa-user-circle"></i></span><span
+                                        class="username">{{ current_user.email }}</span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ url_for('dashboard') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="#">Account settings</a>
+                                    <a class="dropdown-item" href="#">Help</a>
+                                    <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="content_body" style="flex-direction: column; align-items: center; padding-top: 7%;">
+            <h2>Step 1 of 4</h2>
+            <h1>What’s the occasion?</h1>
+            <form method="post" class="event_form">
+                <div class="input_group" style="width: 100%">
+                    <div class="input_group_subject">
+                        <div class="input_group_subject_logo">
+                            <i class="fas fa-align-left"></i>
+                        </div>
+                        <div class="input_group_subject_input">
+                            <label for="subject" id="label_subject">Subject</label>
+                            <input type="text" placeholder="Add note" name="subject" value="Meeting" id="subject"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="input_group_description">
+                        <div class="input_group_description_logo">
+                            <i class="fas fa-align-justify"></i>
+                        </div>
+                        <div class="input_group_description_input">
+                            <label for="description" id="label_description">Description</label>
+                            <input type="text" placeholder="Add note" name="description"
+                                   value="Do not miss it!" id="description" required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content_footer">
+            <a href="{{ url_for('dashboard') }}">
+                <div class="next_page_button">
+                    <button type="button" class="btn btn-success" style="background-color: #0056B3;">Back</button>
+                </div>
+            </a>
+            <a href="#">
+                <div class="next_page_button">
+                    <button type="button" class="btn btn-success continueButton">Continue</button>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="main_content hidden" style="margin: 0;">
+        <div class="content_header">
+            <div class="header_left">
+                <span class="sign"><i class="far fa-clock"></i></span>
+                <p class="name_"><a href="{{ url_for('dashboard') }}" class="main_logo">Simple Scheduler</a></p>
+            </div>
+            <div class="header_right">
+                <ul>
+                    <li>
+                        {% if current_user.is_authenticated %}
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="user_image"><i
+                                                class="far fa-user-circle"></i></span><span
+                                        class="username">{{ current_user.email }}</span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ url_for('dashboard') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="#">Account settings</a>
+                                    <a class="dropdown-item" href="#">Help</a>
+                                    <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="content_body" style="flex-direction: column; align-items: center; padding-top: 7%;">
+            <h2>Step 2 of 4</h2>
+            <h1>Date and time</h1>
+            <form method="post" class="event_form">
+                <div class="input_group" style="width: 100%">
+                    <div class="input_group_subject">
+                        <div class="input_group_subject_logo">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="input_group_subject_input">
+                            <label for="start_time" id="label_subject">Start time</label>
+                            <input type="date" placeholder="Add note" name="start_time"
+                                   id="start_time" required>
+                        </div>
+                    </div>
+                    <div class="input_group_description">
+                        <div class="input_group_description_logo">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div class="input_group_description_input">
+                            <label for="end_time" id="label_description">End Time</label>
+                            <input type="date" placeholder="Add note" name="end_time"
+                                   id="end_time" required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="content_footer">
+            <a href="{{ url_for('dashboard') }}">
+                <div class="next_page_button">
+                    <button type="button" class="btn btn-success" style="background-color: #0056B3;">Back</button>
+                </div>
+            </a>
+            <a href="{{ url_for('dashboard') }}">
+                <div class="next_page_button">
+                    <button type="button" class="btn btn-success continueButton">Continue</button>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
