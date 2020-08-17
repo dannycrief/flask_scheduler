@@ -1,11 +1,12 @@
 import flask_login
-from flask import render_template, request, redirect, session, flash, url_for, g
+from flask import render_template, request, redirect, session, flash, url_for, g, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
-from datetime import timedelta
+from datetime import timedelta, datetime
 from app import app, db, bcrypt
 import flask
+from app import models
 
-from app.models import User, db_session
+from app.models import User, db_session, Event
 
 
 @app.before_request
@@ -26,9 +27,10 @@ def login():
         input_data_password = request.form.get('password')
         if user is not None and bcrypt.check_password_hash(user.password, input_data_password):
             user.authenticated = True
+            user.active = True
             current_db_sessions = db_session.object_session(user)
             current_db_sessions.add(user)
-            db.session.commit()
+            current_db_sessions.commit()
             session.permanent = True
             login_user(user, remember=False)
             if not current_user.is_active():
@@ -39,6 +41,11 @@ def login():
 
 @app.route('/logout')
 def logout():
+    user = User.query.get(current_user.email)
+    user.authenticated = False
+    current_db_sessions = db_session.object_session(user)
+    current_db_sessions.add(user)
+    current_db_sessions.commit()
     logout_user()
     return redirect('/')
 
@@ -63,7 +70,22 @@ def register_user():
 def dashboard():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    return render_template('dashboard.html', title="Dashboard")
+    page = request.args.get('page', 1, type=int)
+    events = db.session.query(models.Event).paginate(page, 4, False)
+    next_url = url_for('dashboard', page=events.next_num) if events.has_next else None
+    prev_url = url_for('dashboard', page=events.prev_num) if events.has_prev else None
+    isEvent = user_have_events()
+    return render_template('dashboard.html', title="Dashboard", events=events.items, isEvent=isEvent,
+                           next_url=next_url, prev_url=prev_url)
+
+
+def user_have_events():
+    events = db.session.query(Event).all()
+    for event in events:
+        if event.author_email == current_user.email:
+            return True
+        else:
+            return False
 
 
 @login_required
@@ -71,4 +93,53 @@ def dashboard():
 def create_event():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
+    if request.method == "POST":
+        redirect(url_for('logout'))
     return render_template('createEvent.html', title="Crete event")
+
+
+@app.route('/subject_description', methods=["POST"])
+def update():
+    if request.method == "POST":
+        author = current_user.email
+        data = {
+            "subject": '',
+            "description": '',
+            "start_time": '',
+            "end_time": ''
+        }
+
+        if request.form['subject']:
+            data['subject'] = request.form['subject']
+        if request.form['description']:
+            data['description'] = request.form['description']
+        if request.form['start_time']:
+            data['start_time'] = request.form['start_time']
+        if request.form['end_time']:
+            data['end_time'] = request.form['end_time']
+
+        if data["subject"] and data['description'] and data['start_time'] and data['end_time']:
+            event = Event(subject=data['subject'], description=data['description'], author=User.query.get(author),
+                          start_time=datetime.strptime(data['start_time'], "%Y-%m-%d").date(),
+                          end_time=datetime.strptime(data['end_time'], "%Y-%m-%d").date())
+            current_db_sessions = db_session.object_session(current_user)
+            current_db_sessions.add(event)
+            current_db_sessions.commit()
+            return jsonify(data)
+    return jsonify({'result': 'error'})
+
+
+@app.route('/events_list', methods=["GET"])
+def events_list():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    events = Event.query.all()
+    return render_template('eventList.html', title='Event List', events=events)
+
+
+@app.route('/event_edit/<int:event_id>', methods=["GET"])
+def event_edit(event_id):
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    event = db.session.query(Event).filter(Event._id == int(event_id)).first()
+    return render_template('eventEdit.html', title='Edit event', event=event)
