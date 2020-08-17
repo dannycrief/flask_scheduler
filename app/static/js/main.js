@@ -1,4 +1,12 @@
-$(document).ready(function () {
+$(window).on('ready', function () {
+    $('.main_content').hide();
+});
+
+$(window).on('load', function () {
+    $('.lds-ring').css('display', 'none');
+    $('.main_content').fadeIn("slow", function () {
+        $(this).css('display', 'flex');
+    });
     const hiddenElement = $('.hidden').css('display', 'none');
     $('.continueButton').on('click', function () {
         const subject = $('#subject');
