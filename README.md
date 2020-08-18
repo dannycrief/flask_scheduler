@@ -4,7 +4,7 @@ Simple Flask Scheduler project
 
 ## Getting Started
 
-These project was created as a Homework for SkillFactory. Module E9. PWS-6. 
+This project was created as a Homework for SkillFactory. Module E9. PWS-6. 
 
 ### Start using this project
 
