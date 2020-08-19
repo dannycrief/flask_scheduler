@@ -68,4 +68,3 @@ docker-compose up
 ## Author
 
 * **[Stepan Kozurak](https://www.linkedin.com/in/stepan-kozurak-77485b16b/)**
-
