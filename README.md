@@ -19,7 +19,7 @@ git clone git@github.com:dannycrief/flask_scheduler.git
 ```
 cd flask_scheduler
 ```
-
+### Environments settings
 * Create .env file and put code below in it
 ```.env
 FLASK_ENV=development
@@ -30,11 +30,25 @@ DATABASE_URL='postgresql://user:password@localhost:5432/db-name'
 PYTHONPATH=.
 POSTS_PER_PAGE=3
 ```
-
+### Alembic settings
+* Create alembic migrations. Initialize alembic
+```commandline
+PYTHONPATH=. alembic init alembic
+```
+* Commit Changes
+```commandline
+PYTHONPATH=. alembic revision --autogenerate -m "initial migration" 
+```
+* Confirm migrations
+```commandline
+PYTHONPATH=. alembic upgrade head
+```
 * Modify alembic config in alembic.ini
 ```ini
 sqlalchemy.url = postgresql://user:password@localhost:5432/db-name
 ```
+
+### Docker settings
 
 * Build Docker
 ```commandline
