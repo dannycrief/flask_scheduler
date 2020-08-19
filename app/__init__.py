@@ -23,7 +23,7 @@ class CustomJSONEncoder(JSONEncoder):
 
 app = Flask(__name__, static_url_path='')
 app.config.from_object(Config)
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = 'LLucNgKPMEJ4JXZrCXx3YgrH'
 
 login_manager = LoginManager()
 login_manager.login_view = 'login'

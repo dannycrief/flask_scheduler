@@ -148,7 +148,6 @@ def event_edit(event_id):
         new_desc = request.form.get('new_description')
         new_start_time = request.form.get('new_start_time')
         new_end_time = request.form.get('new_end_time')
-
         if (new_subject and new_desc) and (not new_start_time and not new_end_time):
             event.subject = new_subject
             event.description = new_desc

@@ -4,6 +4,7 @@ body {
     justify-content: center;
 }
 
+
 .hidden {
     display: none;
 }
@@ -499,6 +500,10 @@ a.content_cards_link:hover {
 .card_content_center > p,
 .card_content_right > p {
     margin: 3px 0;
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .content_events_list > .card_content {
@@ -633,7 +638,7 @@ a.content_cards_link:hover {
     border-radius: 3px;
 }
 
-.content_events_list_edit > form > .edit_form{
+.content_events_list_edit > form > .edit_form {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

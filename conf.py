@@ -2,8 +2,7 @@ import os
 
 
 class Config:
-    db_path = os.path.join(os.path.dirname(__file__), 'db.sqlite')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(db_path)
-    # os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL'] or 'sqlite:///{}'.format(
+        os.path.join(os.path.dirname(__file__), 'db.sqlite'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     POSTS_PER_PAGE = 3
