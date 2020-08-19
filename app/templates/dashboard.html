@@ -16,7 +16,7 @@
         }
     </style>
     {% if current_user.is_authenticated %}
-        <div class="main_content">
+        <div class="main_content show">
             <div class="content_header">
                 <div class="header_left">
                     <span class="sign"><i class="far fa-clock"></i></span>
@@ -141,7 +141,7 @@
                                         <p class="card_event_end_date">To: <span>2020-08-03</span></p>
                                     </div>
                                     <div class="card_content_right">
-                                        <p title="Author" class="author_email">step.kozbvb@icloud.com</p>
+                                        <p title="Author" class="author_email">{{ event.author_email}}</p>
                                         {% if event.author_email == current_user.email %}
                                             <a href="{{ url_for('event_edit', _method='GET', event_id=event._id|int) }}">Edit</a>
                                         {% endif %}

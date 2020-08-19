@@ -137,9 +137,29 @@ def events_list():
     return render_template('eventList.html', title='Event List', events=events)
 
 
-@app.route('/event_edit/<int:event_id>', methods=["GET"])
+@app.route('/event_edit/<int:event_id>', methods=["GET", "POST"])
 def event_edit(event_id):
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    event = db.session.query(Event).filter(Event._id == int(event_id)).first()
+    current_db_sessions = db_session.object_session(current_user)
+    event = current_db_sessions.query(Event).filter(Event._id == int(event_id)).first()
+    if request.method == "POST":
+        new_subject = request.form.get('new_subject')
+        new_desc = request.form.get('new_description')
+        new_start_time = request.form.get('new_start_time')
+        new_end_time = request.form.get('new_end_time')
+
+        if (new_subject and new_desc) and (not new_start_time and not new_end_time):
+            event.subject = new_subject
+            event.description = new_desc
+            current_db_sessions.add(event)
+            current_db_sessions.commit()
+        else:
+            event.subject = new_subject
+            event.description = new_desc
+            event.start_time = datetime.strptime(new_start_time, "%Y-%m-%d").date()
+            event.end_time = datetime.strptime(new_end_time, "%Y-%m-%d").date()
+            current_db_sessions.add(event)
+            current_db_sessions.commit()
+        return redirect(url_for('dashboard'))
     return render_template('eventEdit.html', title='Edit event', event=event)

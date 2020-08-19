@@ -1,13 +1,14 @@
 $(window).on('ready', function () {
-    $('.main_content').hide();
+    $('.show').hide();
 });
 
 $(window).on('load', function () {
+    const hiddenElement = $('.hidden');
+    const showElement = $('.show');
+    showElement.show();
+
     $('.lds-ring').css('display', 'none');
-    $('.main_content').fadeIn("slow", function () {
-        $(this).css('display', 'flex');
-    });
-    const hiddenElement = $('.hidden').css('display', 'none');
+
     $('.continueButton').on('click', function () {
         const subject = $('#subject');
         const description = $('#description');

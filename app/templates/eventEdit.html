@@ -12,11 +12,129 @@
         .main_content {
             width: 47%;
             border-radius: 8px;
+            height: 77%;
         }
     </style>
-    <div class="main_content">
-        <p>{{ event._id }}</p>
-        <p>{{ event.author_email }}</p>
-        <p>{{ event.subject }}</p>
-    </div>
+    {% if current_user.is_authenticated %}
+        <div class="main_content show">
+            <div class="content_header">
+                <div class="header_left">
+                    <span class="sign"><i class="far fa-clock"></i></span>
+                    <p class="name_"><a href="{{ url_for('dashboard') }}" class="main_logo">Simple Scheduler</a></p>
+                </div>
+                <div class="header_right">
+                    <ul>
+                        <li>
+                            {% if current_user.is_authenticated %}
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                       id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="user_image"><i
+                                                class="far fa-user-circle"></i></span><span
+                                            class="username">{{ current_user.email }}</span>
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Account settings</a>
+                                        <a class="dropdown-item" href="#">Help</a>
+                                        <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        <li>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                   id="dropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                   style="background-color: #DD3809; color: white;">
+                                    <span>+</span> More
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ url_for('create_event') }}">Create event</a>
+                                    <a class="dropdown-item" href="#">List of events</a>
+                                    <a class="dropdown-item" href="#">Calendar</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content_body">
+                <div class="content_body_left">
+                    <h1 class="content_body_left_title">Menu</h1>
+                    <div class="content_body_left_list">
+                        <ul>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">Share Events</a></li>
+                            <li><a href="#">Request Events</a></li>
+                            <li><a href="#">Plan Events</a></li>
+                        </ul>
+                    </div>
+                    <h1 class="content_body_left_title_second calendar_title">Calendar</h1>
+                    <div class="create_calendar">
+                        <div class="create_calendar_title">
+                            <span>It's easy</span>
+                        </div>
+                        <button type="button" class="btn btn-secondary"
+                                onclick="window.location.href='#'">Create calendar <span>+</span></button>
+                    </div>
+                </div>
+                <div class="content_body_right">
+                    <div class="content_events_list">
+                        <div class="card_content">
+                            <i class="far fa-user-circle" style="font-size: 2rem"></i>
+                            <div class="card_content_left">
+                                <p class="card_event_subject">Test title</p>
+                                <p class="card_event_description" title="{{ event.description }}">
+                                    Description</p>
+                            </div>
+                            <div class="card_content_center">
+                                <p class="card_event_start_date">From: <span>2020-08-03</span></p>
+                                <p class="card_event_end_date">To: <span>2020-08-03</span></p>
+                            </div>
+                            <div class="card_content_right">
+                                <p title="Author" class="author_email">step.kozbvb@icloud.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_events_list_edit">
+                        <form method="post">
+                            <div class="edit_form">
+                                <div class="left">
+                                    <div class="edit_title">
+                                        <label for="label_subject">Edit Subject Label</label>
+                                        <input type="text" value="{{ event.subject }}" id="label_subject"
+                                               style="color: black" name="new_subject">
+                                    </div>
+                                    <div class="edit_start_date">
+                                        <label for="start_time" id="label_start_time">Edit Start Time</label>
+                                        <input type="date" name="new_start_time" id="start_time"
+                                               value="{{ event.start_date }}"
+                                               >
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="edit_description">
+                                        <label for="label_subject">Edit Description Label</label>
+                                        <input type="text" value="{{ event.description }}" id="label_subject"
+                                               style="color: black" name="new_description">
+                                    </div>
+                                    <div class="edit_end_date">
+                                        <label for="end_time" id="label_start_time">Edit End Time</label>
+                                        <input type="date" name="new_end_time" id="end_time"
+                                               value="{{ event.end_date }}"
+                                               >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

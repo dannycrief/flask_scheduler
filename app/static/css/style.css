@@ -4,6 +4,10 @@ body {
     justify-content: center;
 }
 
+.hidden {
+    display: none;
+}
+
 /*LOADER*/
 
 .lds-ring {
@@ -616,3 +620,22 @@ a.content_cards_link:hover {
     font-size: 18px;
     font-weight: 500;
 }
+
+/*EDIT PAGE*/
+
+.content_events_list_edit {
+    padding: 15px;
+    width: 90%;
+    margin-top: 15px;
+    background-color: white;
+    border-style: dashed;
+    border: 1px dashed #A0AEBD;
+    border-radius: 3px;
+}
+
+.content_events_list_edit > form > .edit_form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
