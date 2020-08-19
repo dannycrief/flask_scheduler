@@ -11,6 +11,6 @@ venv
 db.sqlite
 db.sqlite/
 
-alembic
-alembic/
-alembic.ini
+#alembic
+#alembic/
+#alembic.ini
